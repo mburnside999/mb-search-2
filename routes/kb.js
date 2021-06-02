@@ -19,6 +19,8 @@ router.post("/", function (req, res, next) {
 
   //conn.login('mburnside@cta5.demo', 'salesforce123', function(err, res) {
   //if (err) { return console.error(err); }
+  console.log('Searching for articles using search:',search);
+
   conn.search(
     "FIND {" +
       search +
@@ -28,24 +30,19 @@ router.post("/", function (req, res, next) {
         return console.error(err);
       }
 
-      if (resp.searchRecords.length > 0) {
+      //if (resp.searchRecords.length > 0) {
         console.log(JSON.stringify(resp));
         let summary = resp.searchRecords[0].Summary;
         let ps = resp.searchRecords[0].PublishStatus;
         let title = resp.searchRecords[0].Title;
         let details = resp.searchRecords[0].Details__c;
         let urlname = resp.searchRecords[0].UrlName;
-        console.log("kbid", resp.searchRecords[0].KnowledgeBaseId);
+        console.log("kbid", resp.searchRecords[0].Id);
         console.log(JSON.stringify(resp.searchRecords));
         response.render("kb", {
-          sr: resp.searchRecords,
-          summary: summary,
-          ps: ps,
-          title: title,
-          details: details,
-          urlname: urlname,
+          sr: resp.searchRecords
         });
-      } else response.render("kb", { summary: "No data" });
+      //} else response.render("kb", { summary: "No data" });
     }
   );
   //});
