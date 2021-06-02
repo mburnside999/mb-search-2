@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
         var urlname=resp.searchRecords[0].UrlName;
         console.log(JSON.stringify(resp.searchRecords));
         var x = {'x':resp.searchRecords};
-        response.render('kb',{'sr':searchRecords,'summary':summary,'ps':ps,'title':title,'details':details,'urlname':urlname});
+        response.render('kb',{'sr':resp.searchRecords,'summary':summary,'ps':ps,'title':title,'details':details,'urlname':urlname});
         } else
         response.render('kb',{'summary':'No data'});
 
