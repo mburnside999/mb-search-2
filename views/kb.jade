@@ -12,10 +12,15 @@ if title
     thead
       tr
         th Article 
+        th Summary
+        th View
     tbody    
       each article in sr
         tr
           td #{article.Title}
+          td #{article.summary}
+          td 
+            a(href="/search.html") Search again
     
   p Summary: #{summary} 
   p Status: #{ps} 
