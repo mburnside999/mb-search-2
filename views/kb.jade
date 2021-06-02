@@ -9,9 +9,8 @@ if title
   p SR: #{sr}
   
   
-  each contact in sr
-    p.fred #{contact.Title}
-    a(href="/#{contact.Title}") Search again
+  each article in sr
+    p.fred #{article.Title} &nbsp; #{article.Summary} &nbps; a(href="/#{article.UrlName}") View
       
   p Summary: #{summary} 
   p Status: #{ps} 
