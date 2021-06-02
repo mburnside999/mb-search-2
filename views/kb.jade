@@ -7,9 +7,9 @@ if title
   h1= title 
   p UrlName: #{urlname}  
   p SR: #{sr}
-  ul
+  
   each val, key in sr.x
-    li= key + ': ' + val.Title
+    p val.Title
   p Summary: #{summary} 
   p Status: #{ps} 
   p Details: !{details}
