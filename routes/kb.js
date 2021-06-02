@@ -56,7 +56,7 @@ router.post('/article', function(req, res, next) {
       var x = {'x':resp.searchRecords};
       response.render('kbarticle',{'sr':resp.searchRecords,'summary':summary,'ps':ps,'title':title,'details':details,'urlname':urlname});
       } else
-      response.render('kb',{'summary':'No data'});
+      response.render('kbarticle',{'summary':'No data'});
 
     }
   );
