@@ -62,10 +62,8 @@ router.get("/article/:kbid", function (req, res, next) {
     //if (err) {
       //return console.error(err);
    // }
-    conn.search(
-      'FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE language=\'en_US\' and Id=\'' +
-        kbid +
-        "')",
+   console.log('Searching for article with kbid:',kbid);
+   conn.search('FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE language=\'en_US\' and Id=\'' +kbid +"')",
       function (err, resp) {
         if (err) {
           return console.error(err);
