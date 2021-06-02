@@ -13,7 +13,7 @@ body
       each article in sr
         tr
           td #{article.Title}
-          td #{article.Summary}
+          <td class='fred'>#{article.Summary}</td>
           td 
             a(href="/kb/article/#{article.Id}") Link
    
