@@ -29,7 +29,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/kb', kbRouter);
-app.use('/article', kbRouter);
 
 fetch('https://jsonplaceholder.typicode.com/todos/1')
   .then(response => response.json())
