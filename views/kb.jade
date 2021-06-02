@@ -1,5 +1,4 @@
 extends layout
-
 block content
 
   table.table 
@@ -12,7 +11,7 @@ block content
       each article in sr
         tr
           td #{article.Title}
-          <td class='fred'>#{article.Summary}</td>
+          td #{article.Summary}
           td 
             a(href="/kb/article/#{article.Id}") Link
    
