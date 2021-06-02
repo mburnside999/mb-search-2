@@ -24,6 +24,7 @@ router.post('/', function(req, res, next) {
         var title=resp.searchRecords[0].Title;
         var details=resp.searchRecords[0].Details__c;
         var urlname=resp.searchRecords[0].UrlName;
+        console.log(JSON.stringify(resp.searchRecords));
 
         response.render('kb',{'sr':resp.searchRecords,'summary':summary,'ps':ps,'title':title,'details':details,'urlname':urlname});
         } else
