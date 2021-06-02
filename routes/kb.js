@@ -1,70 +1,95 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-var jsforce = require('jsforce');
-var xx='sssss';
+var jsforce = require("jsforce");
+var conn = new jsforce.Connection();
 
-
+conn.login("mburnside@cta5.demo", "salesforce123", function (err, res) {
+  if (err) {
+    return console.error(err);
+  }
+  console.log("logged in to Salesforce");
+});
 
 /* GET home page. */
-router.post('/', function(req, res, next) {
-    var conn = new jsforce.Connection();
-    let response=res;
-    let search=req.body.srch;
+router.post("/", function (req, res, next) {
+  //var conn = new jsforce.Connection();
+  let response = res;
+  let search = req.body.srch;
 
-    conn.login('mburnside@cta5.demo', 'salesforce123', function(err, res) {
-      if (err) { return console.error(err); }
-    conn.search("FIND {"+search+"} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online')",
-      function(err, resp) {
-        if (err) { return console.error(err); }
-        if (resp.searchRecords.length>0){
-        console.log(JSON.stringify(resp));
-        var summary=resp.searchRecords[0].Summary;
-        var ps=resp.searchRecords[0].PublishStatus;
-        var title=resp.searchRecords[0].Title;
-        var details=resp.searchRecords[0].Details__c;
-        var urlname=resp.searchRecords[0].UrlName;
-        console.log('kbid',resp.searchRecords[0].KnowledgeBaseId);
-        console.log(JSON.stringify(resp.searchRecords));
-        var x = {'x':resp.searchRecords};
-        response.render('kb',{'sr':resp.searchRecords,'summary':summary,'ps':ps,'title':title,'details':details,'urlname':urlname});
-        } else
-        response.render('kb',{'summary':'No data'});
-
+  //conn.login('mburnside@cta5.demo', 'salesforce123', function(err, res) {
+  //if (err) { return console.error(err); }
+  conn.search(
+    "FIND {" +
+      search +
+      "} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online')",
+    function (err, resp) {
+      if (err) {
+        return console.error(err);
       }
-    );
-    }); 
-});
 
-router.get('/article/:kbid', function(req, res, next) {
-  let kbid=req.params['kbid'];
-  console.log('req params',kbid);
-  var conn = new jsforce.Connection();
-  let response=res;
-  //let search=req.body.srch;
-
-  conn.login('mburnside@cta5.demo', 'salesforce123', function(err, res) {
-    if (err) { return console.error(err); }
-  conn.search("FIND {(\"*a*\") OR (\"*e*\")} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE language='en_US' and Id='"+kbid+"')",
-    function(err, resp) {
-      if (err) { return console.error(err); }
-      if (resp.searchRecords.length>0){
-      console.log(JSON.stringify(resp));
-      var summary=resp.searchRecords[0].Summary;
-      var ps=resp.searchRecords[0].PublishStatus;
-      var title=resp.searchRecords[0].Title;
-      var details=resp.searchRecords[0].Details__c;
-      var urlname=resp.searchRecords[0].UrlName;
-      console.log(JSON.stringify(resp.searchRecords));
-      var x = {'x':resp.searchRecords};
-      response.render('kbarticle',{'sr':resp.searchRecords,'summary':summary,'ps':ps,'title':title,'details':details,'urlname':urlname});
-      } else
-      response.render('kbarticle',{'summary':'No data'});
-
+      if (resp.searchRecords.length > 0) {
+        console.log(JSON.stringify(resp));
+        let summary = resp.searchRecords[0].Summary;
+        let ps = resp.searchRecords[0].PublishStatus;
+        let title = resp.searchRecords[0].Title;
+        let details = resp.searchRecords[0].Details__c;
+        let urlname = resp.searchRecords[0].UrlName;
+        console.log("kbid", resp.searchRecords[0].KnowledgeBaseId);
+        console.log(JSON.stringify(resp.searchRecords));
+        response.render("kb", {
+          sr: resp.searchRecords,
+          summary: summary,
+          ps: ps,
+          title: title,
+          details: details,
+          urlname: urlname,
+        });
+      } else response.render("kb", { summary: "No data" });
     }
   );
-  }); 
+  //});
 });
 
+router.get("/article/:kbid", function (req, res, next) {
+  let kbid = req.params["kbid"];
+  console.log("req params", kbid);
+  var conn = new jsforce.Connection();
+  let response = res;
+  //let search=req.body.srch;
+
+  //conn.login("mburnside@cta5.demo", "salesforce123", function (err, res) {
+    //if (err) {
+      //return console.error(err);
+   // }
+    conn.search(
+      'FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE language=\'en_US\' and Id=\'' +
+        kbid +
+        "')",
+      function (err, resp) {
+        if (err) {
+          return console.error(err);
+        }
+        if (resp.searchRecords.length > 0) {
+          console.log(JSON.stringify(resp));
+          let summary = resp.searchRecords[0].Summary;
+          let ps = resp.searchRecords[0].PublishStatus;
+          let title = resp.searchRecords[0].Title;
+          let details = resp.searchRecords[0].Details__c;
+          let urlname = resp.searchRecords[0].UrlName;
+          console.log(JSON.stringify(resp.searchRecords));
+          response.render("kbarticle", {
+            sr: resp.searchRecords,
+            summary: summary,
+            ps: ps,
+            title: title,
+            details: details,
+            urlname: urlname,
+          });
+        } else response.render("kbarticle", { summary: "No data" });
+      }
+    );
+  //});
+});
 
 module.exports = router;
