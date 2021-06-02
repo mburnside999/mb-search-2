@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/article/:kbid', function(req, res, next) {
-  var kbid=req.params['kbid'];
+  let kbid=req.params['kbid'];
   console.log('req params',kbid);
   var conn = new jsforce.Connection();
   let response=res;
