@@ -9,13 +9,13 @@ if title
   p SR: #{sr}
   
   table.table 
-  thead
-    tr
-      th Article 
-  tbody    
-    each article in sr
+    thead
       tr
-        td #{article.Title}
+        th Article 
+    tbody    
+      each article in sr
+        tr
+          td #{article.Title}
     
   p Summary: #{summary} 
   p Status: #{ps} 
