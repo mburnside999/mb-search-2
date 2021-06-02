@@ -24,6 +24,7 @@ router.post('/', function(req, res, next) {
         var title=resp.searchRecords[0].Title;
         var details=resp.searchRecords[0].Details__c;
         var urlname=resp.searchRecords[0].UrlName;
+        console.log('kbid',searchRecords[0].KnowledgeBaseId);
         console.log(JSON.stringify(resp.searchRecords));
         var x = {'x':resp.searchRecords};
         response.render('kb',{'sr':resp.searchRecords,'summary':summary,'ps':ps,'title':title,'details':details,'urlname':urlname});
@@ -35,14 +36,16 @@ router.post('/', function(req, res, next) {
     }); 
 });
 
-router.post('/article', function(req, res, next) {
+router.post('/article/:kbid', function(req, res, next) {
+  var kbid=req.params['kbid'];
+  console.log('req params',kbid);
   var conn = new jsforce.Connection();
   let response=res;
   let search=req.body.srch;
 
   conn.login('mburnside@cta5.demo', 'salesforce123', function(err, res) {
     if (err) { return console.error(err); }
-  conn.search("FIND {"+search+"} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online')",
+  conn.search("FIND {"+kbid+"} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online')",
     function(err, resp) {
       if (err) { return console.error(err); }
       if (resp.searchRecords.length>0){
