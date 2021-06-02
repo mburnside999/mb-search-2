@@ -3,11 +3,7 @@ html
 head
   link(href='/stylesheets/style.css',rel='stylesheet')
 body
-if title
-  h1= title 
-  p UrlName: #{urlname}  
-  p SR: #{sr}
-  
+  h1= Article Search Results
   table.table 
     thead
       tr
@@ -22,10 +18,4 @@ if title
           td 
             a(href="/kbarticle/#{article.KnowledgeArticleId}") Link
     
-  p Summary: #{summary} 
-  p Status: #{ps} 
-  p Details: !{details}
-
-else
-  p No records found
 a(href="/search.html") Search again
