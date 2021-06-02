@@ -26,8 +26,8 @@ router.post("/", function (req, res, next) {
         return console.error(err);
       }
         console.log(JSON.stringify(resp.searchRecords));
-        response.render("title":"Returned Articles","kb", {
-          sr: resp.searchRecords
+        response.render("kb", {
+          sr: resp.searchRecords, title:"Articles Title"
         });
     }
   );
@@ -57,6 +57,7 @@ router.get("/article/:kbid", function (req, res, next) {
             title: title,
             details: details,
             urlname: urlname,
+            title: "Article Detail"
           });
         } else response.render("kbarticle", { summary: "No data" });
       }
