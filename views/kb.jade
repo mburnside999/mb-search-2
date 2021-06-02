@@ -8,8 +8,8 @@ if title
   p UrlName: #{urlname}  
   p SR: #{sr}
   ul
-  each val in sr
-    li= sr.Title
+  each val, key in sr
+    li= key + ': ' + val
   p Summary: #{summary} 
   p Status: #{ps} 
   p Details: !{details}
