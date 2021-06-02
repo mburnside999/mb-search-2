@@ -26,7 +26,7 @@ router.post("/", function (req, res, next) {
         return console.error(err);
       }
         console.log(JSON.stringify(resp.searchRecords));
-        response.render("kb", {
+        response.render("title":"Returned Articles","kb", {
           sr: resp.searchRecords
         });
     }
