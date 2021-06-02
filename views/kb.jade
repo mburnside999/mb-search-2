@@ -8,10 +8,9 @@ if title
   p UrlName: #{urlname}  
   p SR: #{sr}
   
-  ul
+  
   each contact in sr
-    li
-      span= contact.Title
+    p= contact.Title
       
   p Summary: #{summary} 
   p Status: #{ps} 
