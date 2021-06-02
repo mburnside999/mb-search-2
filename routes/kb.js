@@ -54,7 +54,6 @@ router.post("/", function (req, res, next) {
 router.get("/article/:kbid", function (req, res, next) {
   let kbid = req.params["kbid"];
   console.log("req params", kbid);
-  var conn = new jsforce.Connection();
   let response = res;
   //let search=req.body.srch;
 
