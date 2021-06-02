@@ -11,8 +11,8 @@ if title
   ul
   each contact in sr
     li
-      each value, key in contact
-        span= key + ': ' + value + ' '
+      span= contact.Title
+      
   p Summary: #{summary} 
   p Status: #{ps} 
   p Details: !{details}
