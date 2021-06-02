@@ -45,7 +45,7 @@ router.get('/article/:kbid', function(req, res, next) {
 
   conn.login('mburnside@cta5.demo', 'salesforce123', function(err, res) {
     if (err) { return console.error(err); }
-  conn.search("FIND {turbine} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE Id='"+kbid+"')",
+  conn.search("FIND {turbine} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE language='en_US' and Id='"+kbid+"')",
     function(err, resp) {
       if (err) { return console.error(err); }
       if (resp.searchRecords.length>0){
