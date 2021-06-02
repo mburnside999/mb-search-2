@@ -8,8 +8,11 @@ if title
   p UrlName: #{urlname}  
   p SR: #{sr}
   
-  each val, key in sr.x
-    p {val.Title}
+  ul
+  each contact in sr
+    li
+      each value, key in contact
+        span= key + ': ' + value + ' '
   p Summary: #{summary} 
   p Status: #{ps} 
   p Details: !{details}
