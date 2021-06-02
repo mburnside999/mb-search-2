@@ -31,13 +31,13 @@ router.post("/", function (req, res, next) {
       }
 
       //if (resp.searchRecords.length > 0) {
-        console.log(JSON.stringify(resp));
-        let summary = resp.searchRecords[0].Summary;
-        let ps = resp.searchRecords[0].PublishStatus;
-        let title = resp.searchRecords[0].Title;
-        let details = resp.searchRecords[0].Details__c;
-        let urlname = resp.searchRecords[0].UrlName;
-        console.log("kbid", resp.searchRecords[0].Id);
+        //console.log(JSON.stringify(resp));
+        //let summary = resp.searchRecords[0].Summary;
+        //let ps = resp.searchRecords[0].PublishStatus;
+        //let title = resp.searchRecords[0].Title;
+        //let details = resp.searchRecords[0].Details__c;
+        //let urlname = resp.searchRecords[0].UrlName;
+        //console.log("kbid", resp.searchRecords[0].Id);
         console.log(JSON.stringify(resp.searchRecords));
         response.render("kb", {
           sr: resp.searchRecords
