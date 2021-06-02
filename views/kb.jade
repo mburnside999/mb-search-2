@@ -8,10 +8,12 @@ if title
   p UrlName: #{urlname}  
   p SR: #{sr}
   
-  
+  table
+    th Article
   each article in sr
-    p.fred #{article.Title} &nbsp; #{article.Summary} &nbps; a(href="/#{article.UrlName}") View
-      
+    tr
+      td #{article.Title}
+    
   p Summary: #{summary} 
   p Status: #{ps} 
   p Details: !{details}
