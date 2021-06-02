@@ -3,10 +3,12 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.fred {
+  color: #6200ff;
+}
+
 h1 {
   color: #6200ff;
 }
 
-.intro {
-  background-color: yellow;
-}
+
