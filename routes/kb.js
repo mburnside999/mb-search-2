@@ -36,12 +36,12 @@ router.post('/', function(req, res, next) {
     }); 
 });
 
-router.post('/article/:kbid', function(req, res, next) {
+router.get('/article/:kbid', function(req, res, next) {
   var kbid=req.params['kbid'];
   console.log('req params',kbid);
   var conn = new jsforce.Connection();
   let response=res;
-  let search=req.body.srch;
+  //let search=req.body.srch;
 
   conn.login('mburnside@cta5.demo', 'salesforce123', function(err, res) {
     if (err) { return console.error(err); }
