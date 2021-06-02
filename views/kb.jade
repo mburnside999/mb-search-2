@@ -8,8 +8,10 @@ if title
   p UrlName: #{urlname}  
   p SR: #{sr}
   
-  table
-    th Article
+  table.table 
+    tr
+      th Article 
+  tbody    
   each article in sr
     tr
       td #{article.Title}
