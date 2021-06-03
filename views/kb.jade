@@ -6,12 +6,14 @@ block content
       tr
         th Article 
         th Summary
+        th Status
         th View
     tbody    
       each article in sr
         tr
           td #{article.Title}
           td #{article.Summary}
+          td #{article.PublishStatus}
           td 
             a(href="/kb/article/#{article.Id}") Link
    
