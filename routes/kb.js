@@ -15,12 +15,19 @@ conn.login("mburnside@cta5.demo", "salesforce123", function (err, res) {
 router.post("/", function (req, res, next) {
   let response = res;
   let search = req.body.srch;
+  var psearch = (req.body.product) ? true : false;
+  console.log("psearch",psearch)
   console.log('Searching for articles using search:',search);
-
+  
+  var searchstr='';
+  if (psearch){
+   searchstr="FIND {" +search +"} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online' AND DATA CATEGORY Product__c below  All__c)";
+  } else {
+    searchstr="FIND {" +search +"} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online' )";
+  }
+   console.log("searchstr",searchstr);
   conn.search(
-    "FIND {" +
-      search +
-      "} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online')",
+    searchstr,
     function (err, resp) {
       if (err) {
         return console.error(err);
