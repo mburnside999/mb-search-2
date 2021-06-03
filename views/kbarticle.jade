@@ -8,17 +8,16 @@ block content
         th.key Title
           td #{title}
       tr
+        th.key UrlName
+          td #{urlname}
+      tr
         th.key Summary
-          td #{summary} 
+          td #{summary}
+      tr
+        th.key Status
+          td #{ps} 
 
-    
-    
-    h2= title 
-    p UrlName: #{urlname}  
-    p SR: #{sr}
-   
-    p Summary: #{summary} 
-    p Status: #{ps} 
+
     p Details: !{details}
 
   else
