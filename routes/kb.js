@@ -57,7 +57,7 @@ router.get("/article/:kbid", function (req, res, next) {
             title: title,
             details: details,
             urlname: urlname,
-            pagetitle: "Article Details"
+            pagetitle: "Article"
             
           });
         } else response.render("kbarticle", { summary: "No data" });
