@@ -21,9 +21,9 @@ router.post("/", function (req, res, next) {
   
   var searchstr='';
   if (psearch){
-   searchstr="FIND {" +search +"} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online') WITH DATA CATEGORY Product__c below  All__c";
+   searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online') WITH DATA CATEGORY Product__c below  All__c";
   } else {
-    searchstr="FIND {" +search +"} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online' )";
+    searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online' )";
   }
    console.log("searchstr",searchstr);
   conn.search(
