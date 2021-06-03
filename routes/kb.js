@@ -15,7 +15,7 @@ conn.login("mburnside@cta5.demo", "salesforce123", function (err, res) {
 router.post("/", function (req, res, next) {
   let response = res;
   let search = req.body.srch;
-  var psearch = (req.body.product) ? true : false;
+  var psearch = (req.body.product=="restrict") ? true : false;
   console.log("psearch",psearch)
   console.log('Searching for articles using search:',search);
   
