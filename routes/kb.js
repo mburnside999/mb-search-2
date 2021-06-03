@@ -44,7 +44,7 @@ router.get("/article/:kbid", function (req, res, next) {
   let response = res;
   let kbid = req.params["kbid"];
    console.log('Searching for article with kbid:',kbid);
-   conn.search('FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,VersionNumber,FirstPublishedDate,Title WHERE language=\'en_US\' and Id=\'' +kbid +"')",
+   conn.search('FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Cirrus__kav(UrlName,Id, ArticleType, Details__c,KnowledgeArticleId, PublishStatus,Summary,VersionNumber,ArticleNumber,FirstPublishedDate,Title WHERE language=\'en_US\' and Id=\'' +kbid +"')",
       function (err, resp) {
         if (err) {
           return console.error(err);
@@ -58,7 +58,8 @@ router.get("/article/:kbid", function (req, res, next) {
           let urlname = resp.searchRecords[0].UrlName;
           let version = resp.searchRecords[0].VersionNumber;
           let published = resp.searchRecords[0].FirstPublishedDate;
-          
+          let articlenumber = resp.searchRecords[0].ArticleNumber;
+
 
           console.log(JSON.stringify(resp.searchRecords));
           response.render("kbarticle", {
@@ -70,6 +71,7 @@ router.get("/article/:kbid", function (req, res, next) {
             urlname: urlname,
             version: version,
             published: published.substring(0,10),
+            articlenumber: articlenumber,
             pagetitle: "Article"
             
           });
