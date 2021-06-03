@@ -8,9 +8,12 @@ body {
 #articles {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 50%;
 }
-
+#articles td, #articles th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
 #articles th {
   padding-top: 12px;
   padding-bottom: 12px;
