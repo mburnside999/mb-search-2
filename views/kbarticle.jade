@@ -1,15 +1,15 @@
 extends layout
 block content
 
-if title
-  h1= title 
-  p UrlName: #{urlname}  
-  p SR: #{sr}
+  if title
+    h1= title 
+    p UrlName: #{urlname}  
+    p SR: #{sr}
    
-  p Summary: #{summary} 
-  p Status: #{ps} 
-  p Details: !{details}
+    p Summary: #{summary} 
+    p Status: #{ps} 
+    p Details: !{details}
 
-else
-  p No records found
-a(href="/search.html") Search again
+  else
+    p No records found
+  a(href="/search.html") Search again
