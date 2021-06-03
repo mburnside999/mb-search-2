@@ -3,6 +3,11 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
 .fred {
   color: #6200ff;
 }
