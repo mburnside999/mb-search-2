@@ -1,8 +1,7 @@
 extends layout
 block content
 
-  if title
-    
+  if title  
     table#articles 
       tr
         th.key Title
@@ -18,7 +17,7 @@ block content
           td #{ps} 
 
 
-    p Details: !{details}
+    p !{details}
 
   else
     p No records found

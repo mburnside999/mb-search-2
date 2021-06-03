@@ -21,6 +21,9 @@ body {
   background-color: #04AA6D;
   color: white;
 }
+th.key{
+  width: 15%
+}
 
 #articles tr:nth-child(even){background-color: #f2f2f2;}
 
