@@ -58,6 +58,7 @@ router.get("/article/:kbid", function (req, res, next) {
           let urlname = resp.searchRecords[0].UrlName;
           let version = resp.searchRecords[0].VersionNumber;
           let published = resp.searchRecords[0].FirstPublishedDate;
+          
 
           console.log(JSON.stringify(resp.searchRecords));
           response.render("kbarticle", {
@@ -68,7 +69,7 @@ router.get("/article/:kbid", function (req, res, next) {
             details: details,
             urlname: urlname,
             version: version,
-            published: published,
+            published: published.substring(0,8),
             pagetitle: "Article"
             
           });
