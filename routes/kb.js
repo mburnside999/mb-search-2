@@ -69,7 +69,7 @@ router.get("/article/:kbid", function (req, res, next) {
             details: details,
             urlname: urlname,
             version: version,
-            published: published.substring(0,8),
+            published: published.substring(0,10),
             pagetitle: "Article"
             
           });
