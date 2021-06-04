@@ -54,6 +54,10 @@ router.post("/", function (req, res, next) {
         
       
         console.log(JSON.stringify(resp.searchRecords));
+
+        for (i=0; i<resp.searchRecords.length; i++){
+          resp.searchRecords[i]["RT"]="xx";
+         }
         response.render("kb", {
           sr: resp.searchRecords, pagetitle:"KB Articles"
         });
@@ -83,10 +87,10 @@ router.get("/article/:kbid", function (req, res, next) {
           let recordtypeid=resp.searchRecords[0].RecordTypeId;
           let recordtypename = recordTypesArray.find(rt => rt.key === recordtypeid).val;
 
-
-
-
           console.log(JSON.stringify(resp.searchRecords));
+
+
+
           response.render("kbarticle", {
             sr: resp.searchRecords,
             summary: summary,

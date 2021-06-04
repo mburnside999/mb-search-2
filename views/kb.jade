@@ -5,6 +5,7 @@ block content
     thead
       tr
         th Article Number 
+        th RT
         th Title 
         th Summary
         th Status
@@ -13,6 +14,7 @@ block content
       each article in sr
         tr
           td #{article.ArticleNumber}
+          td #{article.RT}
           td #{article.Title}
           td #{article.Summary}
           td #{article.PublishStatus}
