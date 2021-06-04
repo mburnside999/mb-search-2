@@ -8,6 +8,15 @@ conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
   if (err) {
     return console.error(err);
   }
+  
+  conn.query("SELECT Id,Name FROM RecordType WHERE SobjectType = 'Knowledge__kav'", function(err, result) {
+    if (err) { return console.error(err); }
+    console.log("=======>record types result===>",JSON.stringify(result));
+  });
+
+
+
+
   console.log("logged in to Salesforce");
 });
 
