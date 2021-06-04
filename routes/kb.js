@@ -17,12 +17,13 @@ conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
 
     var arr=[];
     for (i=0; i<result.records.length; i++){
-     arr[i]={key:result.records[i].Id, val:result.records[i].Name};
+     arr[i]={"key":result.records[i].Id, "val":result.records[i].Name};
     }
 
     console.log(arr);
 
-
+    let rt = arr.find(r => r.key === "0122v000002FlncAAC")
+console.log(JSON.stringify(rt));
   });
 
 
