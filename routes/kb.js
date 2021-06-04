@@ -81,7 +81,7 @@ router.get("/article/:kbid", function (req, res, next) {
           let published = resp.searchRecords[0].FirstPublishedDate;
           let articlenumber = resp.searchRecords[0].ArticleNumber;
           let recordtypeid=resp.searchRecords[0].RecordTypeId;
-          let recordtypename = recordTypesArray.find(rt => rt.key === recordtypeid);
+          let recordtypename = recordTypesArray.find(rt => rt.key === recordtypeid).val;
 
 
 
@@ -98,7 +98,7 @@ router.get("/article/:kbid", function (req, res, next) {
             published: published.substring(0,10),
             articlenumber: articlenumber,
             pagetitle: "Article",
-            recordtypename: recordtypename.val
+            recordtypename: recordtypename
             
           });
         } else response.render("kbarticle", { summary: "No data" });
