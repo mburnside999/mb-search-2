@@ -15,14 +15,12 @@ conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
     console.log(result.records[0].Name);
     console.log(result.records[0].Id);
 
-    var arr=[];
+    var recordTypesArray=[];
     for (i=0; i<result.records.length; i++){
-     arr[i]={"key":result.records[i].Id, "val":result.records[i].Name};
+     recordTypesArray[i]={"key":result.records[i].Id, "val":result.records[i].Name};
     }
 
-    console.log(arr);
-
-    let rt = arr.find(r => r.key === "0122v000002FlncAAC")
+    let rt = recordTypesArray.find(rt => rt.key === "0122v000002FlncAAC")
 console.log(JSON.stringify(rt));
   });
 
@@ -42,9 +40,9 @@ router.post("/", function (req, res, next) {
   
   var searchstr='';
   if (psearch){
-   searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online') WITH DATA CATEGORY Product__c below  All__c";
+   searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,Title WHERE PublishStatus='online') WITH DATA CATEGORY Product__c below  All__c";
   } else {
-    searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,Summary,Title WHERE PublishStatus='online' )";
+    searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,Title WHERE PublishStatus='online' )";
   }
    console.log("searchstr",searchstr);
   conn.search(
@@ -53,6 +51,8 @@ router.post("/", function (req, res, next) {
       if (err) {
         return console.error(err);
       }
+        
+      
         console.log(JSON.stringify(resp.searchRecords));
         response.render("kb", {
           sr: resp.searchRecords, pagetitle:"KB Articles"
@@ -65,7 +65,7 @@ router.get("/article/:kbid", function (req, res, next) {
   let response = res;
   let kbid = req.params["kbid"];
    console.log('Searching for article with kbid:',kbid);
-   conn.search('FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Knowledge__kav(UrlName,Id, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,Summary,VersionNumber,ArticleNumber,FirstPublishedDate,Title WHERE language=\'en_US\' and Id=\'' +kbid +"')",
+   conn.search('FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Knowledge__kav(UrlName,Id, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,VersionNumber,ArticleNumber,FirstPublishedDate,Title WHERE language=\'en_US\' and Id=\'' +kbid +"')",
       function (err, resp) {
         if (err) {
           return console.error(err);
@@ -80,6 +80,10 @@ router.get("/article/:kbid", function (req, res, next) {
           let version = resp.searchRecords[0].VersionNumber;
           let published = resp.searchRecords[0].FirstPublishedDate;
           let articlenumber = resp.searchRecords[0].ArticleNumber;
+          let recordtypeid=resp.searchRecords[0].RecordTypeId;
+          let recordtypename = recordTypesArray.find(rt => rt.key === recordtypeid);
+
+
 
 
           console.log(JSON.stringify(resp.searchRecords));
@@ -93,7 +97,8 @@ router.get("/article/:kbid", function (req, res, next) {
             version: version,
             published: published.substring(0,10),
             articlenumber: articlenumber,
-            pagetitle: "Article"
+            pagetitle: "Article",
+            recordtypename: recordtypename
             
           });
         } else response.render("kbarticle", { summary: "No data" });
