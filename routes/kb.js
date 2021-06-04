@@ -3,6 +3,7 @@ var router = express.Router();
 
 var jsforce = require("jsforce");
 var conn = new jsforce.Connection();
+var recordTypesArray=[];
 
 conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
   if (err) {
@@ -14,8 +15,7 @@ conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
     console.log("=======>record types result===>",JSON.stringify(result));
     console.log(result.records[0].Name);
     console.log(result.records[0].Id);
-
-    var recordTypesArray=[];
+    recordTypesArray=[];
     for (i=0; i<result.records.length; i++){
      recordTypesArray[i]={"key":result.records[i].Id, "val":result.records[i].Name};
     }
