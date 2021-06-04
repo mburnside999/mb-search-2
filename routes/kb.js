@@ -98,7 +98,7 @@ router.get("/article/:kbid", function (req, res, next) {
             published: published.substring(0,10),
             articlenumber: articlenumber,
             pagetitle: "Article",
-            recordtypename: recordtypename
+            recordtypename: recordtypename.val
             
           });
         } else response.render("kbarticle", { summary: "No data" });
