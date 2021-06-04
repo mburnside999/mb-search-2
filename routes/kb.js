@@ -12,6 +12,8 @@ conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
   conn.query("SELECT Id,Name FROM RecordType WHERE SobjectType = 'Knowledge__kav'", function(err, result) {
     if (err) { return console.error(err); }
     console.log("=======>record types result===>",JSON.stringify(result));
+    console.log(result.records[0].Name);
+    console.log(result.records[0].Id);
   });
 
 
