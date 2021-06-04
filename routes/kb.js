@@ -15,7 +15,7 @@ conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
     console.log(result.records[0].Name);
     console.log(result.records[0].Id);
 
-    var arr[];
+    var arr=[];
     for (i=0; i<result.records.length; i++){
      arr[i]={key:result.records[i].Id, val:result.records[i].Name};
     }
