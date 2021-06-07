@@ -25,6 +25,10 @@ th.key{
   width: 15%
 }
 
+th.snippet{
+   width:50%;
+}
+
 #articles tr:nth-child(even){background-color: #f2f2f2;}
 
 #articles tr:hover {background-color: #ddd;}
