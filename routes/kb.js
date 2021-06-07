@@ -59,6 +59,7 @@ router.post("/", function (req, res, next) {
           recordtypeid=resp.searchRecords[i].RecordTypeId;
           recordtypename = recordTypesArray.find(rt => rt.key === recordtypeid).val;
           resp.searchRecords[i]["Type"]=recordtypename;
+          resp.searchRecords[i]["Snippet"]=resp.searchRecords[i]["snippet.text"];
          }
         response.render("kb", {
           sr: resp.searchRecords, pagetitle:"KB Articles"
