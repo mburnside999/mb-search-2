@@ -3,7 +3,8 @@ extends layout
 block content
 
   form(action="/kb", method="post") 
-    input(type="text", id="srch", name="srch")
-    input(type="checkbox", id="product", name="product", value="restrict")
-    label(for="product") Restrict to Products
+    label Search
+      input(type="text", id="srch", name="srch")
+    label Restrict to Products
+        input(type="checkbox", id="product", name="product", value="restrict")
     input(type="submit", value="add")
