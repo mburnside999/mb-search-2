@@ -5,9 +5,9 @@ block content
   form(action="/kb", method="post") 
     div
       label(for="srch") Search
-      input(type="text", id="srch", name="srch")
-    div
+      input#srch(type="text")
+    
       label(for="product") Restrict to Products
-      input(type="checkbox", id="product", name="product", value="restrict")
+      input#product(type="checkbox", value="restrict")
     div
       input(type="submit", value="add")
