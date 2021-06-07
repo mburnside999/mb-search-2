@@ -1,18 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to Mikes new #{title}
-  select(name='dropDown', id='')
-    each val in ['red' , 'green' , 'blue']
-        option=val
-      
-  
-  form(name="add-estimation", method="post")
-    div.input
-        span.label Title
-            input(type="text", name="title")
-    div.input
-        span.label Description
-            textarea(name="description", cols="40", rows="5")
-    div.actions
+
+  form(action="/kb", method="post") 
+    input(type="text", id="srch", name="srch")
+    input(type="checkbox", id="product", name="product", value="restrict")
+    label(for="product") Restrict to Products
+    input(type="submit", value="add")
