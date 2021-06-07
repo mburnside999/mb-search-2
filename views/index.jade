@@ -3,11 +3,10 @@ extends layout
 block content
 
   form(action="/kb", method="post") 
-    div
-      label(for="srch") Search
+    div.form-group
+      label(for="srch") Search: 
       input#srch(type="text")
-    
-      label(for="product") Restrict to Products
+      label(for="product") Restrict to Products: 
       input#product(type="checkbox", value="restrict")
-    div
-      input(type="submit", value="add")
+    div.form-group
+      input(type="submit", value="Search")
