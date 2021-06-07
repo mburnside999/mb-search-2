@@ -8,6 +8,7 @@ block content
         th Type
         th Title 
         th Summary
+        th Snippet
         th Status
         th View
     tbody    
@@ -17,6 +18,7 @@ block content
           td #{article.Type}
           td #{article.Title}
           td #{article.Summary}
+          td #{article.snippet.text}
           td #{article.PublishStatus}
           td 
             a(href="/kb/article/#{article.Id}") View Article
