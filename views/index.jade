@@ -4,9 +4,10 @@ block content
 
   form(action="/kb", method="post") 
     div.form-group
-      label(for="srch") Search: 
+      label(for="srch") Search:&nbsp; 
       input#srch(type="text")
-      label(for="product") Restrict to Products: 
+    div.form-group
+      label(for="product") Restrict to Products:&nbsp; 
       input#product(type="checkbox", value="restrict")
     div.form-group
       input(type="submit", value="Search")
