@@ -42,7 +42,7 @@ router.post("/", function (req, res, next) {
   if (psearch){
    searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,Title WHERE PublishStatus='online') WITH DATA CATEGORY Product__c below  All__c  WITH SNIPPET (target_length=120)";
   } else {
-    searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,Title WHERE PublishStatus='online' WITH SNIPPET (target_length=120) )";
+    searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,Title WHERE PublishStatus='online') WITH SNIPPET (target_length=120) )";
   }
    console.log("searchstr",searchstr);
   conn.search(
