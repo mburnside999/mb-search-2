@@ -2,15 +2,14 @@ var express = require("express");
 var router = express.Router();
 
 var jsforce = require("jsforce");
-var conn = new jsforce.Connection();
+var mbconn = require("../routes/sfconnect");
+
 var recordTypesArray=[];
 
-conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
-  if (err) {
-    return console.error(err);
-  }
+/* GET home page. */
+router.post("/", function (req, res, next) {
   
-  conn.query("SELECT Id,Name FROM RecordType WHERE SobjectType = 'Knowledge__kav'", function(err, result) {
+  mbconn.query("SELECT Id,Name FROM RecordType WHERE SobjectType = 'Knowledge__kav'", function(err, result) {
     if (err) { return console.error(err); }
     console.log("=======>record types result===>",JSON.stringify(result));
     console.log(result.records[0].Name);
@@ -18,19 +17,14 @@ conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
     recordTypesArray=[];
     for (i=0; i<result.records.length; i++){
      recordTypesArray[i]={"key":result.records[i].Id, "val":result.records[i].Name};
-    }
-
-    
+    } 
   });
-
-
-
-
-  console.log("logged in to Salesforce");
-});
-
-/* GET home page. */
-router.post("/", function (req, res, next) {
+  
+  
+  
+  
+  
+  
   let response = res;
   let search = req.body.srch;
   var categoryselect = req.body.categoryselect;
@@ -45,7 +39,7 @@ router.post("/", function (req, res, next) {
 
   }
    console.log("searchstr",searchstr);
-  conn.search(
+  mbconn.search(
     searchstr,
     function (err, resp) {
       if (err) {
@@ -72,7 +66,7 @@ router.get("/article/:kbid", function (req, res, next) {
   let response = res;
   let kbid = req.params["kbid"];
    console.log('Searching for article with kbid:',kbid);
-   conn.search('FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Knowledge__kav(UrlName,Id, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,VersionNumber,ArticleNumber,FirstPublishedDate,Title WHERE language=\'en_US\' and Id=\'' +kbid +"')",
+   mbconn.search('FIND {("*a*") OR ("*e*") OR ("*i*") OR ("*o*") OR ("*u*")} RETURNING Knowledge__kav(UrlName,Id, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,VersionNumber,ArticleNumber,FirstPublishedDate,Title WHERE language=\'en_US\' and Id=\'' +kbid +"')",
       function (err, resp) {
         if (err) {
           return console.error(err);
