@@ -20,8 +20,7 @@ conn.login("mikeb@lfl.demo", "salesforce123", function (err, res) {
      recordTypesArray[i]={"key":result.records[i].Id, "val":result.records[i].Name};
     }
 
-    let rt = recordTypesArray.find(rt => rt.key === "0122v000002FlncAAC")
-console.log(JSON.stringify(rt));
+    
   });
 
 
@@ -34,15 +33,16 @@ console.log(JSON.stringify(rt));
 router.post("/", function (req, res, next) {
   let response = res;
   let search = req.body.srch;
-  var psearch = (req.body.product=="restrict") ? true : false;
-  console.log("psearch",psearch)
+  var categoryselect = req.body.categoryselect;
+  console.log("**** categoryselect:",req.body.categoryselect);
   console.log('Searching for articles using search:',search);
   
   var searchstr='';
-  if (psearch){
-   searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,Title WHERE PublishStatus='online') WITH DATA CATEGORY Product__c below  All__c  WITH SNIPPET";
-  } else {
+  if (categoryselect=='All'){
     searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,Title WHERE PublishStatus='online') WITH SNIPPET";
+  } else {
+    searchstr="FIND {" +search +"} RETURNING Knowledge__kav(UrlName,Id, ArticleNumber, FAQ_Answer__c,KnowledgeArticleId, PublishStatus,RecordTypeId, Summary,Title WHERE PublishStatus='online') WITH DATA CATEGORY Product__c  below "+categoryselect+"__c WITH SNIPPET";
+
   }
    console.log("searchstr",searchstr);
   conn.search(
@@ -53,7 +53,7 @@ router.post("/", function (req, res, next) {
       }
         
       
-        console.log(JSON.stringify(resp.searchRecords));
+        //console.log(JSON.stringify(resp.searchRecords));
 
         for (i=0; i<resp.searchRecords.length; i++){
           recordtypeid=resp.searchRecords[i].RecordTypeId;
@@ -78,7 +78,7 @@ router.get("/article/:kbid", function (req, res, next) {
           return console.error(err);
         }
         if (resp.searchRecords.length > 0) {
-          console.log(JSON.stringify(resp));
+          //console.log(JSON.stringify(resp));
           let summary = resp.searchRecords[0].Summary;
           let ps = resp.searchRecords[0].PublishStatus;
           let title = resp.searchRecords[0].Title;
@@ -90,7 +90,7 @@ router.get("/article/:kbid", function (req, res, next) {
           let recordtypeid=resp.searchRecords[0].RecordTypeId;
           let recordtypename = recordTypesArray.find(rt => rt.key === recordtypeid).val;
 
-          console.log(JSON.stringify(resp.searchRecords));
+          //console.log(JSON.stringify(resp.searchRecords));
 
 
 

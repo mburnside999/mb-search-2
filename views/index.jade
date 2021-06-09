@@ -1,17 +1,4 @@
 extends layout
-
 block content
-
-  form(action="/kb", method="post") 
-    div.form-group
-      label(for="srch") Search:&nbsp; 
-      input#srch(type="text")
-    div.form-group
-      label(for="product") Restrict to Products:&nbsp; 
-      input#product(type="checkbox", value="restrict")
-      each val in [1, 2, 3, 4, 5]
-        label(for=val) #{val}
-        input(type="checkbox", id=val, value=val)
-
-    div.form-group
-      input(type="submit", value="Search")
+  h1 Hello
+  

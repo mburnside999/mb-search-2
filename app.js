@@ -1,8 +1,4 @@
-const cors = require('cors');
-var corsOptions = {
-  origin: 'http://localhost:2000',
-  optionsSuccessStatus: 200 // For legacy browser support
-}
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -13,9 +9,9 @@ const fetch = require('node-fetch');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var kbRouter = require('./routes/kb');
+var kbSearchRouter = require('./routes/kbsearch');
 
 var app = express();
-app.use(cors(corsOptions));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -29,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/kb', kbRouter);
+app.use('/kbsearch', kbSearchRouter);
 
 fetch('https://jsonplaceholder.typicode.com/todos/1')
   .then(response => response.json())
