@@ -2,13 +2,24 @@ var express = require("express");
 var router = express.Router();
 
 var jsforce = require("jsforce");
-var mbconn = require("../routes/sfconnect");
+//var mbconn = require("../routes/sfconnect");
 
 var recordTypesArray=[];
 
 /* GET home page. */
 router.post("/", function (req, res, next) {
-  
+console.log('in kb router /');
+  if (!req.session.accessToken || !req.session.instanceUrl) { 
+    console.log('no session, redirecting');
+    res.redirect('/auth/login'); 
+    }
+    console.log('creating jsforce connection');
+  let mbconn = new jsforce.Connection({
+    oauth2 : req.session.oauth2,
+    accessToken: req.session.accessToken,
+    instanceUrl: req.session.instanceUrl
+  });
+  console.log('setting up query');
   mbconn.query("SELECT Id,Name FROM RecordType WHERE SobjectType = 'Knowledge__kav'", function(err, result) {
     if (err) { return console.error(err); }
     console.log("=======>record types result===>",JSON.stringify(result));
@@ -19,11 +30,6 @@ router.post("/", function (req, res, next) {
      recordTypesArray[i]={"key":result.records[i].Id, "val":result.records[i].Name};
     } 
   });
-  
-  
-  
-  
-  
   
   let response = res;
   let search = req.body.srch;
@@ -63,6 +69,17 @@ router.post("/", function (req, res, next) {
 });
 
 router.get("/article/:kbid", function (req, res, next) {
+  
+  if (!req.session.accessToken || !req.session.instanceUrl) { res.redirect('/'); }
+
+  //instantiate connection
+  let mbconn = new jsforce.Connection({
+    oauth2 : req.session.oauth2,
+    accessToken: req.session.accessToken,
+    instanceUrl: req.session.instanceUrl
+});
+  
+  
   let response = res;
   let kbid = req.params["kbid"];
    console.log('Searching for article with kbid:',kbid);
