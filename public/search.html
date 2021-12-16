@@ -63,6 +63,24 @@
 				isOfflineSupportEnabled: true
 			}
 		);
+		$Lightning.use(
+			"embeddedService:sidebarApp",
+			function () {
+				$Lightning.createComponent(
+					"c:HelloWorldComp",
+					{},
+					document.body,
+					function (cmp) {
+						console.log("callback");
+					}
+				);
+			},
+			'https://sdodemo-main-15f37d7d165.force.com/consumer'
+			
+		);
+
+
+
 	};
 
 	if (!window.embedded_svc) {
