@@ -18,11 +18,15 @@ const oauth2 = new jsforce.OAuth2({
   // you can change loginUrl to connect to sandbox or prerelease env.
   loginUrl: "https://lfldemo.my.salesforce.com",
   //clientId and Secret will be provided when you create a new connected app in your SF developer account
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
+  // clientId: process.env.CLIENT_ID,
+  // clientSecret: process.env.CLIENT_SECRET,
+  clientId:
+    "3MVG9G9pzCUSkzZsnusgB.Vk7Qpe4BOlvpOyg5LvNhw5yKZuSKLDjJCEjIHSy2BJ8XFDsLW9FYgJhPzwAf0zq",
+  clientSecret:
+    "E0F531C6F6B998A23755C3CF334776B92E5ED757642B38B1ACEF4829FFB44FA8",
   //redirectUri : 'http://localhost:' + port +'/token'
-  //redirectUri : 'http://localhost:3000/token'
-  redirectUri: process.env.REDIRECT_URI,
+  redirectUri: "http://localhost:3000/token",
+  //redirectUri: process.env.REDIRECT_URI,
 });
 var app = express();
 // view engine setup
