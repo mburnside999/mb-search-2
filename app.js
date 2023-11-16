@@ -47,7 +47,7 @@ app.get("/auth/login", function (req, res) {
 });
 
 app.get("/token", function (req, res) {
-  console.log("client id=" + process.env.CLIENT_ID);
+  console.log("in /token, client id=" + process.env.CLIENT_ID);
   const conn = new jsforce.Connection({ oauth2: oauth2 });
   const code = req.query.code;
   conn.authorize(code, function (err, userInfo) {
